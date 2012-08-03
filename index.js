@@ -1,5 +1,5 @@
 !function () {
-  if (typeof require === void 0) {
+  if (typeof require === 'undefined') {
     require = function (path) {
       return {
           'backbone': Backbone
@@ -81,4 +81,8 @@
         return this;
       }
   });
+
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Backbone.RecursiveModel;
+  }
 }();

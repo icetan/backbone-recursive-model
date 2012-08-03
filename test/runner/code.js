@@ -3581,7 +3581,7 @@ function(require,exports,module){
 function(require,exports,module){
 // Boiler file: index.js
 !function () {
-  if (typeof require === void 0) {
+  if (typeof require === 'undefined') {
     require = function (path) {
       return {
           'backbone': Backbone
@@ -3663,6 +3663,10 @@ function(require,exports,module){
         return this;
       }
   });
+
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Backbone.RecursiveModel;
+  }
 }();
 
 });register.call(this,5,{"backbone":2,"../index":4},
