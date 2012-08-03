@@ -1,0 +1,8 @@
+{
+    "name": "backbone-recursive-model"
+  , "version": "0.0.1"
+  , "dependencies": {
+        "backbone": "~0.9.2"
+      , "underscore": "*"
+    }
+}
