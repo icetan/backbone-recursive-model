@@ -3580,15 +3580,7 @@ function(require,exports,module){
 });register.call(this,4,{"backbone":2,"underscore":3},
 function(require,exports,module){
 // Boiler file: index.js
-!function () {
-  if (typeof require === 'undefined') {
-    require = function (path) {
-      return {
-          'backbone': Backbone
-        , 'underscore': _
-      }[path];
-    };
-  }
+!function (require) {
   var Backbone = require('backbone')
     , Model = Backbone.Model
     , _ = require('underscore');
@@ -3667,7 +3659,12 @@ function(require,exports,module){
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Backbone.RecursiveModel;
   }
-}();
+}(typeof require !== 'undefined' ? require : function (path) {
+  return {
+      'backbone': Backbone
+    , 'underscore': _
+  }[path];
+});
 
 });register.call(this,5,{"backbone":2,"../index":4},
 function(require,exports,module){

@@ -1,12 +1,4 @@
-!function () {
-  if (typeof require === 'undefined') {
-    require = function (path) {
-      return {
-          'backbone': Backbone
-        , 'underscore': _
-      }[path];
-    };
-  }
+!function (require) {
   var Backbone = require('backbone')
     , Model = Backbone.Model
     , _ = require('underscore');
@@ -85,4 +77,9 @@
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Backbone.RecursiveModel;
   }
-}();
+}(typeof require !== 'undefined' ? require : function (path) {
+  return {
+      'backbone': Backbone
+    , 'underscore': _
+  }[path];
+});
