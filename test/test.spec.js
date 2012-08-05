@@ -15,6 +15,10 @@ describe('Backbone.RecursiveModel', function () {
     json = JSON.stringify(model);
   });
 
+  it('considers serialized version to equal modelmodel  instance', function () {
+    expect(model.isEqual(JSON.parse(json))).toBe(true);
+  });
+
   it('should serialize/dezerialize with same JSON result', function () {
     model.set(JSON.parse(json));
     expect(JSON.stringify(model)).toBe(json);
