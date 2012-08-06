@@ -1,12 +1,21 @@
 !function (require) {
   var Backbone = require('backbone')
     , Model = Backbone.Model
-    , _ = require('underscore');
+    , _ = require('underscore')
+    , COMPATIBLE_VERSION = '0.9.2';
+
+  if (Backbone.VERSION !== COMPATIBLE_VERSION) {
+    console.warn('Backbone version might be incompatible with RecursiveModel! Running ' +
+                 Backbone.VERSION + ', but needs ' + COMPATIBLE_VERSION + '.');
+  }
 
   Backbone.RecursiveModel = Model.extend({
       // Custom Underscore equality method.
       isEqual: function(b) {
-        if (b instanceof Model) b = b.attributes;
+        if (b instanceof Model) {
+          if (this.constructor !== b.constructor) return false;
+          b = b.attributes;
+        }
         return _.isEqual(this.attributes, b);
       }
 

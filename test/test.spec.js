@@ -15,16 +15,23 @@ describe('Backbone.RecursiveModel', function () {
     json = JSON.stringify(model);
   });
 
-  it('considers serialized version to equal modelmodel  instance', function () {
+  it('considers serialized version to equal model instance.', function () {
+    var model1 = new Backbone.RecursiveModel(JSON.parse(json));
     expect(model.isEqual(JSON.parse(json))).toBe(true);
+    expect(model.isEqual(model1)).toBe(true);
   });
 
-  it('should serialize/dezerialize with same JSON result', function () {
+  it('considers models deserialized from same JSON but different class to NOT be equal.', function () {
+    var model1 = new Backbone.Model(JSON.parse(json));
+    expect(model.isEqual(model1)).toBe(false);
+  });
+
+  it('should serialize/dezerialize with same JSON result.', function () {
     model.set(JSON.parse(json));
     expect(JSON.stringify(model)).toBe(json);
   });
 
-  it('should not create new sub models instances', function () {
+  it('should not create new sub models instances.', function () {
     model.set(JSON.parse(json));
     expect(model.get('submodel1').get('a')).toBe(1);
     expect(model.get('submodel2').get('submodel3').get('a')).toBe(3);
@@ -32,7 +39,7 @@ describe('Backbone.RecursiveModel', function () {
     expect(model.get('submodel2').get('submodel3')).toBe(submodel3);
   });
 
-  it('should keep change bindings for sub models', function () {
+  it('should keep change bindings for sub models.', function () {
     var changed = false;
     submodel2.on('change:a', function () { changed = true; });
     model.set(JSON.parse(json));
@@ -41,7 +48,7 @@ describe('Backbone.RecursiveModel', function () {
     expect(changed).toBe(true);
   });
 
-  it('should not trigger unnecessary change events for deep sub models', function () {
+  it('should not trigger unnecessary change events for deep sub models.', function () {
     var changed = false
       , data = JSON.parse(json);
     model.on('change', function () { changed = true; });
