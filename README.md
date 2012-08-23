@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/icetan/backbone-recursive-model.png)](http://travis-ci.org/icetan/backbone-recursive-model)
 # Backbone Recursive Model
 
 ## Is this for me?
